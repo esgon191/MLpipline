@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
   <diagram name="Страница — 1" id="0h4XNoyMmiEWJlXm1XkB">
-    <mxGraphModel dx="1865" dy="763" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2817" dy="1462" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -707,7 +707,7 @@
         <mxCell id="RDHdoT84P5IF0I3SCrhC-296" value="" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.annotation_2;align=left;labelPosition=right;pointerEvents=1;rotation=-90;" vertex="1" parent="RDHdoT84P5IF0I3SCrhC-298">
           <mxGeometry x="108.39" y="-96.12" width="40" height="232.27" as="geometry" />
         </mxCell>
-        <mxCell id="RDHdoT84P5IF0I3SCrhC-297" value="Tensorflow Serving" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="RDHdoT84P5IF0I3SCrhC-298">
+        <mxCell id="RDHdoT84P5IF0I3SCrhC-297" value="python" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="RDHdoT84P5IF0I3SCrhC-298">
           <mxGeometry x="58.395" y="47.495000000000005" width="140" height="30" as="geometry" />
         </mxCell>
       </root>
