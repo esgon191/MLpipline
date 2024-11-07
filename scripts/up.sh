@@ -1,1 +1,1 @@
-docker-compose -p kursovaya up -d
+docker-compose -p kursovaya up 
