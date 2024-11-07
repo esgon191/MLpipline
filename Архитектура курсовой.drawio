@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
   <diagram name="Страница — 1" id="0h4XNoyMmiEWJlXm1XkB">
-    <mxGraphModel dx="3886" dy="1032" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2630" dy="1685" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -30,10 +30,10 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="RDHdoT84P5IF0I3SCrhC-78" value="" style="group" vertex="1" connectable="0" parent="1">
-          <mxGeometry x="790" y="180" width="680" height="347.5" as="geometry" />
+          <mxGeometry x="840" y="-20" width="1200" height="460" as="geometry" />
         </mxCell>
         <mxCell id="RDHdoT84P5IF0I3SCrhC-76" value="&lt;p style=&quot;margin:0px;margin-top:6px;text-align:center;&quot;&gt;&lt;b&gt;SQL&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="align=left;overflow=fill;html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="RDHdoT84P5IF0I3SCrhC-78">
-          <mxGeometry x="-9.53" y="-30" width="689.53" height="377.5" as="geometry" />
+          <mxGeometry x="-10.79" y="-220" width="1080.79" height="680" as="geometry" />
         </mxCell>
         <mxCell id="RDHdoT84P5IF0I3SCrhC-77" value="" style="shape=component;jettyWidth=8;jettyHeight=4;" vertex="1" parent="RDHdoT84P5IF0I3SCrhC-76">
           <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
@@ -41,23 +41,23 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="RDHdoT84P5IF0I3SCrhC-63" value="&lt;div style=&quot;box-sizing:border-box;width:100%;background:#e4e4e4;padding:2px;&quot;&gt;Поступившие фотографии&lt;/div&gt;&lt;table style=&quot;width:100%;font-size:1em;&quot; cellpadding=&quot;2&quot; cellspacing=&quot;0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;PK&lt;/td&gt;&lt;td&gt;photo_id&lt;/td&gt;&lt;td&gt;ID Фотографии&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;/td&gt;&lt;td&gt;latitude&lt;/td&gt;&lt;td&gt;Широта&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;/td&gt;&lt;td&gt;longitude&lt;/td&gt;&lt;td&gt;Долгота&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;DATETIME&lt;/td&gt;&lt;td&gt;date&lt;/td&gt;&lt;td&gt;Дата/Время съемки&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;BOOL&lt;/td&gt;&lt;td&gt;is_processed&lt;/td&gt;&lt;td&gt;Обработана?&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" vertex="1" parent="RDHdoT84P5IF0I3SCrhC-78">
-          <mxGeometry x="18.55" y="230" width="291.45" height="110" as="geometry" />
+          <mxGeometry x="21.00514705882353" y="302.80575539568343" width="330.02426470588233" height="144.82014388489208" as="geometry" />
         </mxCell>
-        <mxCell id="RDHdoT84P5IF0I3SCrhC-65" value="&lt;div style=&quot;box-sizing:border-box;width:100%;background:#e4e4e4;padding:2px;&quot;&gt;Обнаруженные на фото знаки&lt;/div&gt;&lt;table style=&quot;width:100%;font-size:1em;&quot; cellpadding=&quot;2&quot; cellspacing=&quot;0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;PK&lt;/td&gt;&lt;td&gt;sign_id&lt;/td&gt;&lt;td&gt;ID Обнаруженного знака&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FK&lt;/td&gt;&lt;td&gt;photo_id&lt;/td&gt;&lt;td&gt;ID Поступившей фотографии&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FK&lt;/td&gt;&lt;td&gt;type_id&lt;/td&gt;&lt;td&gt;ID тип (название) знака&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;/td&gt;&lt;td&gt;X1&lt;/td&gt;&lt;td&gt;Bound-box&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;br&gt;&lt;/td&gt;&lt;td&gt;X2&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;br&gt;&lt;/td&gt;&lt;td&gt;Y1&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;br&gt;&lt;/td&gt;&lt;td&gt;Y2&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" vertex="1" parent="RDHdoT84P5IF0I3SCrhC-78">
-          <mxGeometry x="37" y="10" width="261.41" height="172.5" as="geometry" />
+        <mxCell id="RDHdoT84P5IF0I3SCrhC-65" value="&lt;div style=&quot;box-sizing:border-box;width:100%;background:#e4e4e4;padding:2px;&quot;&gt;Обнаруженные на фото знаки&lt;/div&gt;&lt;table style=&quot;width:100%;font-size:1em;&quot; cellpadding=&quot;2&quot; cellspacing=&quot;0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;PK&lt;/td&gt;&lt;td&gt;sign_id&lt;/td&gt;&lt;td&gt;ID Обнаруженного знака&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FK&lt;/td&gt;&lt;td&gt;photo_id&lt;/td&gt;&lt;td&gt;ID Поступившей фотографии&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FK&lt;/td&gt;&lt;td&gt;type_id&lt;/td&gt;&lt;td&gt;ID тип (название) знака&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;/td&gt;&lt;td&gt;confidence&lt;/td&gt;&lt;td&gt;Степень уверенности&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;DATETIME&lt;/td&gt;&lt;td&gt;created_at&lt;/td&gt;&lt;td&gt;Когда обнаружен&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;/td&gt;&lt;td&gt;X1&lt;/td&gt;&lt;td&gt;Bound-box&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;br&gt;&lt;/td&gt;&lt;td&gt;X2&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;br&gt;&lt;/td&gt;&lt;td&gt;Y1&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;br&gt;&lt;/td&gt;&lt;td&gt;Y2&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" vertex="1" parent="RDHdoT84P5IF0I3SCrhC-78">
+          <mxGeometry x="41.9" y="13.17" width="308.1" height="186.83" as="geometry" />
         </mxCell>
-        <mxCell id="RDHdoT84P5IF0I3SCrhC-67" value="&lt;div style=&quot;box-sizing:border-box;width:100%;background:#e4e4e4;padding:2px;&quot;&gt;Обнаруженные на знаке дефекты&lt;br&gt;&lt;/div&gt;&lt;table style=&quot;width:100%;font-size:1em;&quot; cellpadding=&quot;2&quot; cellspacing=&quot;0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;PK&lt;/td&gt;&lt;td&gt;sign_id&lt;/td&gt;&lt;td&gt;ID Обнаруженного знака&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FK&lt;/td&gt;&lt;td&gt;defect_type_id&lt;/td&gt;&lt;td&gt;ID типа дефекта&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;/td&gt;&lt;td&gt;confidence&lt;/td&gt;&lt;td&gt;Степень уверенности&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;/td&gt;&lt;td&gt;X1&lt;/td&gt;&lt;td&gt;Bound-box&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;br&gt;&lt;/td&gt;&lt;td&gt;X2&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;br&gt;&lt;/td&gt;&lt;td&gt;Y1&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;br&gt;&lt;/td&gt;&lt;td&gt;Y2&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" vertex="1" parent="RDHdoT84P5IF0I3SCrhC-78">
-          <mxGeometry x="390.0000000000001" y="63.75" width="240.64" height="190" as="geometry" />
+        <mxCell id="RDHdoT84P5IF0I3SCrhC-67" value="&lt;div style=&quot;box-sizing:border-box;width:100%;background:#e4e4e4;padding:2px;&quot;&gt;Обнаруженные на знаке дефекты&lt;br&gt;&lt;/div&gt;&lt;table style=&quot;width:100%;font-size:1em;&quot; cellpadding=&quot;2&quot; cellspacing=&quot;0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;PK&lt;/td&gt;&lt;td&gt;defect_id&lt;/td&gt;&lt;td&gt;ID дефекта&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FK&lt;/td&gt;&lt;td&gt;sign_id&lt;/td&gt;&lt;td&gt;ID Обнаруженного знака&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FK&lt;/td&gt;&lt;td&gt;defect_type_id&lt;/td&gt;&lt;td&gt;ID типа дефекта&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;/td&gt;&lt;td&gt;confidence&lt;/td&gt;&lt;td&gt;Степень уверенности&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;DATETIME&lt;/td&gt;&lt;td&gt;created_at&lt;/td&gt;&lt;td&gt;Дата обнаружения&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;/td&gt;&lt;td&gt;X1&lt;/td&gt;&lt;td&gt;Bound-box&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;br&gt;&lt;/td&gt;&lt;td&gt;X2&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;br&gt;&lt;/td&gt;&lt;td&gt;Y1&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;FLOAT&lt;br&gt;&lt;/td&gt;&lt;td&gt;Y2&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" vertex="1" parent="RDHdoT84P5IF0I3SCrhC-78">
+          <mxGeometry x="420" y="-120" width="300" height="190" as="geometry" />
         </mxCell>
         <mxCell id="RDHdoT84P5IF0I3SCrhC-68" value="" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="RDHdoT84P5IF0I3SCrhC-78" source="RDHdoT84P5IF0I3SCrhC-65" target="RDHdoT84P5IF0I3SCrhC-63">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="18.545603944124878" y="-250" as="sourcePoint" />
-            <mxPoint x="58.6442070665571" y="-320" as="targetPoint" />
+            <mxPoint x="21.000169172023757" y="-329.136690647482" as="sourcePoint" />
+            <mxPoint x="66.4059403547779" y="-421.294964028777" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="10" y="53" />
-              <mxPoint x="10" y="201" />
-              <mxPoint x="330" y="201" />
-              <mxPoint x="330" y="257" />
+              <mxPoint x="11.323529411764707" y="69.77697841726619" />
+              <mxPoint x="11.323529411764707" y="264.62589928057554" />
+              <mxPoint x="373.6764705882353" y="264.62589928057554" />
+              <mxPoint x="373.6764705882353" y="338.35251798561154" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -71,10 +71,10 @@
             <mxPoint x="17" y="5" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="RDHdoT84P5IF0I3SCrhC-71" value="" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="RDHdoT84P5IF0I3SCrhC-78" source="RDHdoT84P5IF0I3SCrhC-67" target="RDHdoT84P5IF0I3SCrhC-65">
+        <mxCell id="RDHdoT84P5IF0I3SCrhC-71" value="" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0.999;entryY=0.146;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="RDHdoT84P5IF0I3SCrhC-78" source="RDHdoT84P5IF0I3SCrhC-67" target="RDHdoT84P5IF0I3SCrhC-65">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="456.62284305669687" y="-66" as="sourcePoint" />
-            <mxPoint x="299.23582580115044" y="-100" as="targetPoint" />
+            <mxPoint x="517.0582193436126" y="-86.89208633093526" as="sourcePoint" />
+            <mxPoint x="338.8405674513027" y="-131.65467625899282" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="RDHdoT84P5IF0I3SCrhC-72" value="0..n" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=top;" connectable="0" vertex="1" parent="RDHdoT84P5IF0I3SCrhC-71">
@@ -85,6 +85,44 @@
         <mxCell id="RDHdoT84P5IF0I3SCrhC-73" value="1" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=top;" connectable="0" vertex="1" parent="RDHdoT84P5IF0I3SCrhC-71">
           <mxGeometry x="1" relative="1" as="geometry">
             <mxPoint x="17" y="5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RDHdoT84P5IF0I3SCrhC-300" value="&lt;div style=&quot;box-sizing:border-box;width:100%;background:#e4e4e4;padding:2px;&quot;&gt;Известные дорожные знаки&lt;/div&gt;&lt;table style=&quot;width:100%;font-size:1em;&quot; cellpadding=&quot;2&quot; cellspacing=&quot;0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;PK&lt;/td&gt;&lt;td&gt;sign_id&lt;/td&gt;&lt;td&gt;ID системный знака&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;STRING&lt;/td&gt;&lt;td&gt;number&lt;/td&gt;&lt;td&gt;номер знака&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;STRING&lt;/td&gt;&lt;td&gt;name&lt;/td&gt;&lt;td&gt;Название&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" vertex="1" parent="RDHdoT84P5IF0I3SCrhC-78">
+          <mxGeometry x="458.36" y="222.81" width="272.49" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="RDHdoT84P5IF0I3SCrhC-302" value="" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1.009;exitY=0.362;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;exitPerimeter=0;" edge="1" parent="RDHdoT84P5IF0I3SCrhC-78" source="RDHdoT84P5IF0I3SCrhC-65" target="RDHdoT84P5IF0I3SCrhC-300">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="531.38" y="200" as="sourcePoint" />
+            <mxPoint x="393.0049999999991" y="318.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RDHdoT84P5IF0I3SCrhC-303" value="0..n" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=top;" connectable="0" vertex="1" parent="RDHdoT84P5IF0I3SCrhC-302">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RDHdoT84P5IF0I3SCrhC-304" value="1" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=top;" connectable="0" vertex="1" parent="RDHdoT84P5IF0I3SCrhC-302">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RDHdoT84P5IF0I3SCrhC-305" value="&lt;div style=&quot;box-sizing:border-box;width:100%;background:#e4e4e4;padding:2px;&quot;&gt;Известные дефекты дорожных знаков&lt;/div&gt;&lt;table style=&quot;width:100%;font-size:1em;&quot; cellpadding=&quot;2&quot; cellspacing=&quot;0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;PK&lt;/td&gt;&lt;td&gt;sign_id&lt;/td&gt;&lt;td&gt;ID системный дефекта&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;STRING&lt;/td&gt;&lt;td&gt;name&lt;/td&gt;&lt;td&gt;Название&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" vertex="1" parent="RDHdoT84P5IF0I3SCrhC-78">
+          <mxGeometry x="770" y="85.15" width="272.49" height="67.19" as="geometry" />
+        </mxCell>
+        <mxCell id="RDHdoT84P5IF0I3SCrhC-306" value="" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="RDHdoT84P5IF0I3SCrhC-78" source="RDHdoT84P5IF0I3SCrhC-67" target="RDHdoT84P5IF0I3SCrhC-305">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="800" y="-70" as="sourcePoint" />
+            <mxPoint x="929" y="-47" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RDHdoT84P5IF0I3SCrhC-307" value="0..n" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=top;" connectable="0" vertex="1" parent="RDHdoT84P5IF0I3SCrhC-306">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RDHdoT84P5IF0I3SCrhC-308" value="1" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=top;" connectable="0" vertex="1" parent="RDHdoT84P5IF0I3SCrhC-306">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="-10" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="RDHdoT84P5IF0I3SCrhC-85" value="" style="group" vertex="1" connectable="0" parent="1">
@@ -133,15 +171,16 @@
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="720" y="519" />
-              <mxPoint x="720" y="465" />
+              <mxPoint x="720" y="365" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="RDHdoT84P5IF0I3SCrhC-96" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.001;entryY=0.66;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="RDHdoT84P5IF0I3SCrhC-92" target="RDHdoT84P5IF0I3SCrhC-63">
+        <mxCell id="RDHdoT84P5IF0I3SCrhC-96" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.003;entryY=0.68;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="RDHdoT84P5IF0I3SCrhC-92" target="RDHdoT84P5IF0I3SCrhC-63">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="730" y="545" />
-              <mxPoint x="730" y="483" />
+              <mxPoint x="730" y="390" />
+              <mxPoint x="849" y="390" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -149,7 +188,8 @@
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="740" y="571" />
-              <mxPoint x="740" y="501" />
+              <mxPoint x="740" y="412" />
+              <mxPoint x="810" y="412" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -684,13 +724,13 @@
           <mxGeometry x="22.5" y="47.5" width="140" height="30" as="geometry" />
         </mxCell>
         <mxCell id="RDHdoT84P5IF0I3SCrhC-291" value="" style="group" vertex="1" connectable="0" parent="1">
-          <mxGeometry x="756.2449999999999" y="539.995" width="736.25" height="80.005" as="geometry" />
+          <mxGeometry x="790" y="480.01" width="830" height="80.01" as="geometry" />
         </mxCell>
         <mxCell id="RDHdoT84P5IF0I3SCrhC-287" value="" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.annotation_2;align=left;labelPosition=right;pointerEvents=1;rotation=-90;" vertex="1" parent="RDHdoT84P5IF0I3SCrhC-291">
-          <mxGeometry x="348.125" y="-348.125" width="40" height="736.25" as="geometry" />
+          <mxGeometry x="392.45331069609506" y="-348.1467564527218" width="45.093378607809846" height="736.2960127492033" as="geometry" />
         </mxCell>
         <mxCell id="RDHdoT84P5IF0I3SCrhC-288" value="PostgreSQL" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="RDHdoT84P5IF0I3SCrhC-291">
-          <mxGeometry x="298.125" y="50.004999999999995" width="140" height="30" as="geometry" />
+          <mxGeometry x="336.08658743633276" y="50.008125117180185" width="157.82682512733447" height="30.00187488281983" as="geometry" />
         </mxCell>
         <mxCell id="RDHdoT84P5IF0I3SCrhC-294" value="" style="group" vertex="1" connectable="0" parent="1">
           <mxGeometry x="223.5" y="452.5" width="277.5" height="67.5" as="geometry" />
@@ -711,7 +751,7 @@
           <mxGeometry x="58.395" y="47.495000000000005" width="140" height="30" as="geometry" />
         </mxCell>
         <mxCell id="RDHdoT84P5IF0I3SCrhC-299" value="&lt;div&gt;project-root/&lt;/div&gt;&lt;div&gt;│&lt;/div&gt;&lt;div&gt;├── docker-compose.yml&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; # Основной файл для управления контейнерами&lt;/div&gt;&lt;div&gt;├── Dockerfiles/&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; # Каталог для Dockerfile-ов&lt;/div&gt;&lt;div&gt;│&amp;nbsp; &amp;nbsp;├── fastapi.Dockerfile&amp;nbsp; &amp;nbsp; # Dockerfile для FastAPI приложения&lt;/div&gt;&lt;div&gt;│&amp;nbsp; &amp;nbsp;├── kafka_consumer.Dockerfile&amp;nbsp; # Dockerfile для Kafka Consumer&lt;/div&gt;&lt;div&gt;│&amp;nbsp; &amp;nbsp;├── postgres.Dockerfile&amp;nbsp; &amp;nbsp;# (опционально) Dockerfile для PostgreSQL&lt;/div&gt;&lt;div&gt;│&amp;nbsp; &amp;nbsp;└── minio.Dockerfile&amp;nbsp; &amp;nbsp; &amp;nbsp; # (опционально) Dockerfile для MinIO&lt;/div&gt;&lt;div&gt;│&lt;/div&gt;&lt;div&gt;├── app/&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; # Каталог с исходным кодом FastAPI приложения&lt;/div&gt;&lt;div&gt;│&amp;nbsp; &amp;nbsp;├── main.py&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;# Основной файл FastAPI&lt;/div&gt;&lt;div&gt;│&amp;nbsp; &amp;nbsp;├── database.py&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;# Подключение к базе данных PostgreSQL&lt;/div&gt;&lt;div&gt;│&amp;nbsp; &amp;nbsp;├── models.py&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;# Определение моделей SQLAlchemy&lt;/div&gt;&lt;div&gt;│&amp;nbsp; &amp;nbsp;├── minio_client.py&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;# Клиент MinIO для работы с файлами&lt;/div&gt;&lt;div&gt;│&amp;nbsp; &amp;nbsp;├── requirements.txt&amp;nbsp; &amp;nbsp; &amp;nbsp; # Зависимости Python&lt;/div&gt;&lt;div&gt;│&amp;nbsp; &amp;nbsp;└── Dockerfile&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; # Dockerfile для сборки FastAPI образа&lt;/div&gt;&lt;div&gt;│&lt;/div&gt;&lt;div&gt;├── kafka/&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; # Каталог с Kafka Consumer&lt;/div&gt;&lt;div&gt;│&amp;nbsp; &amp;nbsp;├── consumer.py&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;# Python скрипт для Kafka Consumer&lt;/div&gt;&lt;div&gt;│&amp;nbsp; &amp;nbsp;├── requirements.txt&amp;nbsp; &amp;nbsp; &amp;nbsp; # Зависимости для Kafka Consumer&lt;/div&gt;&lt;div&gt;│&amp;nbsp; &amp;nbsp;└── Dockerfile&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; # Dockerfile для Kafka Consumer&lt;/div&gt;&lt;div&gt;│&lt;/div&gt;&lt;div&gt;├── tensorflow/&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;# Каталог с TensorFlow моделью&lt;/div&gt;&lt;div&gt;│&amp;nbsp; &amp;nbsp;├── saved_model/&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; # Экспортированная TensorFlow модель в формате SavedModel&lt;/div&gt;&lt;div&gt;│&amp;nbsp; &amp;nbsp;└── Dockerfile&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; # Dockerfile для TensorFlow Serving (опционально)&lt;/div&gt;&lt;div&gt;│&lt;/div&gt;&lt;div&gt;├── pgdata/&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;# Данные для PostgreSQL (том для хранения данных базы)&lt;/div&gt;&lt;div&gt;│&amp;nbsp; &amp;nbsp;└── ...&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;# Директория для хранения персистентных данных&lt;/div&gt;&lt;div&gt;│&lt;/div&gt;&lt;div&gt;├── minio/&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; # Данные для MinIO&lt;/div&gt;&lt;div&gt;│&amp;nbsp; &amp;nbsp;└── data/&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;# Директория, в которой MinIO хранит данные&lt;/div&gt;&lt;div&gt;│&lt;/div&gt;&lt;div&gt;├── scripts/&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; # Скрипты для автоматизации работы и развертывания&lt;/div&gt;&lt;div&gt;│&amp;nbsp; &amp;nbsp;├── setup.sh&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; # Скрипт начальной настройки и запуска контейнеров&lt;/div&gt;&lt;div&gt;│&amp;nbsp; &amp;nbsp;└── backup.sh&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;# Скрипт для резервного копирования данных&lt;/div&gt;&lt;div&gt;│&lt;/div&gt;&lt;div&gt;└── docs/&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;# Документация проекта&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; ├── README.md&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;# Основная информация о проекте&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; └── API.md&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; # Документация для API&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="1970" y="100" width="630" height="620" as="geometry" />
+          <mxGeometry x="1960" y="690" width="630" height="620" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
