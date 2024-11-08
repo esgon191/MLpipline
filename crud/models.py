@@ -25,7 +25,7 @@ class RoadSign(Base):
     name: Mapped[str]
     
 
-class BoundBoxAble(Base):
+class BoundBoxAble:
     """Абстрактный для найденных знаков и дефектов"""
 
     id: Mapped[intpk]
@@ -37,7 +37,7 @@ class BoundBoxAble(Base):
     y2: Mapped[float]
 
 
-class DetectedSign(BoundBoxAble):
+class DetectedSign(Base,BoundBoxAble):
     __tablename__ = "detected_sign"
     
     photo_id: Mapped[int] = mapped_column(ForeignKey("photo.id", ondelete="CASCADE"))
@@ -51,7 +51,7 @@ class Defect(Base):
     name: Mapped[str]
     
 
-class DetectedDefect(BoundBoxAble):
+class DetectedDefect(Base, BoundBoxAble):
     __tablename__ = "detected_defect"
     
     detected_sign_id: Mapped[int] = mapped_column(ForeignKey("photo.id"))

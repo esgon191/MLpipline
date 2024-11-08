@@ -1,0 +1,29 @@
+from database import async_engine, async_session_factory, session_factory, sync_engine
+from models import Base
+from sqlalchemy import text
+
+class SyncORM:
+    @staticmethod
+    def create_tables():
+        sync_engine.echo = True
+        Base.metadata.drop_all(sync_engine)
+        Base.metadata.create_all(sync_engine)
+        sync_engine.echo = True
+
+    @staticmethod
+    def check_connection():
+        sync_engine.echo = True
+        with sync_engine.connect() as connection:
+            try:
+                connection.execute(text("""
+                        CREATE TABLE IF NOT EXISTS test_table (
+                            id SERIAL PRIMARY KEY,
+                        name VARCHAR(100) NOT NULL,
+                        value INTEGER NOT NULL
+                    )
+                """))
+                connection.commit()
+                print("SUCCES")
+            except Exception as e:
+                print("FAIL")
+                print(e)
