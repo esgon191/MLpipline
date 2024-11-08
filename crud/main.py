@@ -1,5 +1,5 @@
-from queries.orm import SyncORM
-
+from queries.orm import SyncORM, AsyncORM
+import asyncio
 # SyncORM.check_connection()
 
-SyncORM.create_tables()
+asyncio.run(AsyncORM.create_tables())
