@@ -37,7 +37,7 @@ class BoundBoxAble:
     y2: Mapped[float]
 
 
-class DetectedSign(Base,BoundBoxAble):
+class DetectedSign(Base, BoundBoxAble):
     __tablename__ = "detected_sign"
     
     photo_id: Mapped[int] = mapped_column(ForeignKey("photo.id", ondelete="CASCADE"))
