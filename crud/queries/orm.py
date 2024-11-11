@@ -1,4 +1,5 @@
-from database import async_engine, async_session_factory, sync_engine, minio_client
+from database import async_engine, async_session_factory, sync_engine, minio_client, orm_logger
+from logger import LoggerFactory
 from models import Base
 from sqlalchemy import text
 
@@ -36,10 +37,16 @@ class AsyncORM:
             await conn.run_sync(Base.metadata.create_all)
             await conn.commit()
 
+        orm_logger.debug("PSQL tables created")
         bucket_name = "bucket"
 
         if not minio_client.bucket_exists(bucket_name):
+            orm_logger.info(f"MinIO {bucket_name} does not exist")
             minio_client.make_bucket(bucket_name)
+            orm_logger.info(f"MinIO {bucket_name} created")
+
+        else:
+            orm_logger.debug(f"MinIO {bucket_name} exists")
 
     @staticmethod
     async def process_photo():
