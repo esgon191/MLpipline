@@ -4,6 +4,11 @@ class Settings:
     DB_USER = "user" 
     DB_PASS = "password"
     DB_NAME = "db0"
+    
+    MINIO_HOST = "127.0.0.1"
+    MINIO_PORT = 9000 
+    MINIO_NAME = "user"
+    MINIO_PASSWORD = "password"
 
     @property
     def DATABASE_URL_asyncpg(self):

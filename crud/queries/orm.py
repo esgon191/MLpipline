@@ -1,4 +1,4 @@
-from database import async_engine, async_session_factory, session_factory, sync_engine
+from database import async_engine, async_session_factory, sync_engine, minio_client
 from models import Base
 from sqlalchemy import text
 
@@ -35,3 +35,12 @@ class AsyncORM:
             await conn.run_sync(Base.metadata.drop_all)
             await conn.run_sync(Base.metadata.create_all)
             await conn.commit()
+
+        bucket_name = "bucket"
+
+        if not minio_client.bucket_exists(bucket_name):
+            minio_client.make_bucket(bucket_name)
+
+    @staticmethod
+    async def process_photo():
+        pass

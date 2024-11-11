@@ -1,4 +1,4 @@
-import asyncio
+import asyncio, minio
 from typing import Annotated
 
 from sqlalchemy import String, create_engine
@@ -23,6 +23,13 @@ session_factory = sessionmaker(sync_engine)
 async_session_factory = async_sessionmaker(async_engine)
 
 str_256 = Annotated[str, 256]
+
+minio_client = minio.Minio(
+    f'{settings.MINIO_HOST}:{settings.MINIO_PORT}',
+    access_key = settings.MINIO_NAME,
+    secret_key = settings.MINIO_PASSWORD,
+    secure=False
+    )
 
 class Base(DeclarativeBase):
     type_annotation_map = {
