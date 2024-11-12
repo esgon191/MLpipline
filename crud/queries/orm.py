@@ -1,6 +1,5 @@
 from database import async_engine, async_session_factory, create_minio_client, minio_client, orm_logger
 from models import Base, Photo, RoadSign, Defect, DetectedDefect, DetectedSign
-from sqlalchemy import text
 import json, aiobotocore, aiofiles
 
 class AsyncORM:
@@ -16,18 +15,6 @@ class AsyncORM:
             await conn.run_sync(Base.metadata.create_all)
 
             orm_logger.debug("PSQL tables created")
-            
-            """
-            client = create_minio_client()
-            async with client as client_obj:
-                if not client_obj.bucket_exists(cls.default_bucket):
-                    orm_logger.info(f"MinIO {bucket} does not exist")
-                    client_obj.make_bucket(bucket)
-                    orm_logger.info(f"MinIO {bucket} created")
-
-                else:
-                    orm_logger.debug(f"MinIO {bucket} exists")
-            """
 
             if not minio_client.bucket_exists(bucket):
                 orm_logger.info(f"MinIO {bucket} does not exist")
@@ -38,25 +25,6 @@ class AsyncORM:
                 orm_logger.debug(f"MinIO {bucket} exists")
             
             await conn.commit()
-
-    @classmethod
-    def json_producer(cls, json_file: str | None = None, json_string: str | None = None, is_file: bool = False):
-        """
-        НЕ ИСПОЛЬЗУЕТСЯ
-
-        Поставщик json-объектов. Унифицированный интерфейс для поставки
-        json из строк и файлов
-        """
-        if is_file:
-            with open(json_file, 'r') as file:
-                data = json.load(file)
-        
-        else:
-            data = json.load(json_string)
-        
-        orm_logger.info("json produced {data}")
-        return data
-
 
     @classmethod
     async def async_file_reader(cls, file_path):
@@ -72,13 +40,19 @@ class AsyncORM:
     @classmethod
     async def upload_to_minio(cls, bucket_name, object_name, data):
         # Создание клиента
-        orm_logger.debug("MinIO client created")
         client = create_minio_client()
+        orm_logger.debug("MinIO client created")
 
         async with client as client_obj:
             # Загружаем данные в MinIO
-            await client_obj.put_object(Bucket=bucket_name, Key=object_name, Body=data)
-            orm_logger.info("object putted")
+            orm_logger.debug("MinIO client context") 
+            await client_obj.put_object(
+                Bucket=bucket_name, 
+                Key=object_name, 
+                Body=data
+            )
+
+            orm_logger.info("MinIO object putted")
 
     @classmethod
     async def first_insert_photo(cls, way_to_photo : str, way_to_metadata : str, bucket : str = None) -> int:
@@ -104,8 +78,8 @@ class AsyncORM:
         async with async_session_factory() as session:
             # Добавление метаданных в клиент реляционной бд
             session.add(photo) 
-            await session.commit()
-            #await session.flush()
+            await session.flush()
+
             photo_id = photo.id
 
             orm_logger.debug(f"photo {photo_id} added to session")
@@ -113,7 +87,7 @@ class AsyncORM:
             # Добавление объекта фото в S3 
             await cls.upload_to_minio(
                 bucket,
-                '1', # photo_id, # Имя файла фото - первичный ключ метаданных
+                str(photo_id), 
                 photo_obj
             )
 
@@ -124,6 +98,16 @@ class AsyncORM:
             
         return 200
 
+    @classmethod
+    async def test_insert(cls):
+        async with async_session_factory() as session:
+            photo = Photo(
+                latitude=1,
+                longitude=1,
+                is_processed=False
+            )
+            session.add(photo)
+            await session.commit()
 
     @staticmethod
     async def process_photo():
