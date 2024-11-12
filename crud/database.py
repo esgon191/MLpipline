@@ -1,3 +1,4 @@
+import aiobotocore.session
 import asyncio, minio, logging, aiobotocore
 from typing import Annotated
 
@@ -17,19 +18,18 @@ async_engine = create_async_engine(
 # Фабрика асинхронных клиентов реляционной бд
 async_session_factory = async_sessionmaker(async_engine)
 
-# Фабрика асинхронных подключений к S3
-session = aiobotocore.get_session()
+# Фабрика асинхронных клиентов S3
+session = aiobotocore.session.get_session()
 
-async def create_minio_client():
+def create_minio_client():
     return session.create_client(
         's3',
-        endpoint_url = f'{settings.MINIO_HOST}:{settings.MINIO_PORT}',
-        access_key = settings.MINIO_NAME,
-        secret_key = settings.MINIO_PASSWORD,
-        secure=False
+        endpoint_url = f'http://{settings.MINIO_HOST}:{settings.MINIO_PORT}',
+        aws_access_key_id = settings.MINIO_NAME,
+        aws_secret_access_key = settings.MINIO_PASSWORD
     )
 
-# Объект подключения к S3
+# Синхронный клиент подключения к S3
 minio_client = minio.Minio(
     f'{settings.MINIO_HOST}:{settings.MINIO_PORT}',
     access_key = settings.MINIO_NAME,
