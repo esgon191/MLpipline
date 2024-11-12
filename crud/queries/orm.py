@@ -19,17 +19,15 @@ class AsyncORM:
             
             """
             client = create_minio_client()
+            async with client as client_obj:
+                if not client_obj.bucket_exists(cls.default_bucket):
+                    orm_logger.info(f"MinIO {bucket} does not exist")
+                    client_obj.make_bucket(bucket)
+                    orm_logger.info(f"MinIO {bucket} created")
 
-            if not client.bucket_exists(cls.default_bucket):
-                orm_logger.info(f"MinIO {cls.default_bucket} does not exist")
-                client.make_bucket(cls.default_bucket)
-                orm_logger.info(f"MinIO {cls.default_bucket} created")
-
-            else:
-                orm_logger.debug(f"MinIO {cls.default_bucket} exists")
+                else:
+                    orm_logger.debug(f"MinIO {bucket} exists")
             """
-
-            client = create_minio_client()
 
             if not minio_client.bucket_exists(bucket):
                 orm_logger.info(f"MinIO {bucket} does not exist")
@@ -38,7 +36,7 @@ class AsyncORM:
 
             else:
                 orm_logger.debug(f"MinIO {bucket} exists")
-
+            
             await conn.commit()
 
     @classmethod
@@ -74,7 +72,7 @@ class AsyncORM:
     @classmethod
     async def upload_to_minio(cls, bucket_name, object_name, data):
         # Создание клиента
-        orm_logger.debug("mino client created")
+        orm_logger.debug("MinIO client created")
         client = create_minio_client()
 
         async with client as client_obj:
@@ -106,14 +104,16 @@ class AsyncORM:
         async with async_session_factory() as session:
             # Добавление метаданных в клиент реляционной бд
             session.add(photo) 
-            await session.flush()
+            await session.commit()
+            #await session.flush()
             photo_id = photo.id
 
             orm_logger.debug(f"photo {photo_id} added to session")
+
             # Добавление объекта фото в S3 
             await cls.upload_to_minio(
                 bucket,
-                photo_id, # Имя файла фото - первичный ключ метаданных
+                '1', # photo_id, # Имя файла фото - первичный ключ метаданных
                 photo_obj
             )
 
