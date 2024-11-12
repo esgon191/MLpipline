@@ -1,4 +1,4 @@
-import asyncio, minio, logging
+import asyncio, minio, logging, aiobotocore
 from typing import Annotated
 
 from sqlalchemy import String, create_engine
@@ -8,32 +8,38 @@ from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 from logger import LoggerFactory
 from config import settings
 
-sync_engine = create_engine(
-    url=settings.DATABASE_URL_psycopg,
-    echo=True,
-    # pool_size=5,
-    # max_overflow=10,
-)
-
+# Асинхронная сессия реляционной бд
 async_engine = create_async_engine(
     url=settings.DATABASE_URL_asyncpg,
     echo=True,
 )
 
-session_factory = sessionmaker(sync_engine)
+# Фабрика асинхронных клиентов реляционной бд
 async_session_factory = async_sessionmaker(async_engine)
 
-str_256 = Annotated[str, 256]
+# Фабрика асинхронных подключений к S3
+session = aiobotocore.get_session()
 
+async def create_minio_client():
+    return session.create_client(
+        's3',
+        endpoint_url = f'{settings.MINIO_HOST}:{settings.MINIO_PORT}',
+        access_key = settings.MINIO_NAME,
+        secret_key = settings.MINIO_PASSWORD,
+        secure=False
+    )
+
+# Объект подключения к S3
 minio_client = minio.Minio(
     f'{settings.MINIO_HOST}:{settings.MINIO_PORT}',
     access_key = settings.MINIO_NAME,
     secret_key = settings.MINIO_PASSWORD,
     secure=False
     )
-
+# Логгер для ORM
 orm_logger = LoggerFactory.create_logger("orm", "logs/orm.log", level=logging.DEBUG)
 
+str_256 = Annotated[str, 256]
 class Base(DeclarativeBase):
     type_annotation_map = {
         str_256: String(256)

@@ -27,7 +27,7 @@ services:
     ports:
       - "9000:9000"                   # Порт для доступа к MinIO консоли
       - "9001:9001"                   # Порт для доступа к административной панели
-    command: server /data --console-address ":9001"
+    command: server /data --address ":9000" --console-address ":9001"
 
 volumes:
   pgdata:
