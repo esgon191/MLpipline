@@ -1,11 +1,17 @@
-import aiobotocore.config
-import aiobotocore.session
-from database import async_engine, async_session_factory, create_minio_client, minio_client, orm_logger
+from database import async_engine, async_session_factory, minio_client, orm_logger, S3Client
 from models import Base, Photo, RoadSign, Defect, DetectedDefect, DetectedSign
-import json, aiobotocore, aiofiles
+from config import settings
+import json, aiofiles
 
 class AsyncORM:
-    default_bucket = 'bucket' 
+    default_bucket="bucket"
+
+    s3client = S3Client(
+        access_key=settings.MINIO_NAME,
+        secret_key=settings.MINIO_PASSWORD,
+        endpoint_url=f"http://{settings.MINIO_HOST}:{settings.MINIO_PORT}",
+        bucket_name=default_bucket
+    )
 
     @classmethod
     async def create_tables(cls, bucket : str = None):
@@ -40,24 +46,6 @@ class AsyncORM:
         return data
 
     @classmethod
-    async def upload_to_minio(cls, bucket_name, object_name, data):
-        # Создание клиента
-        client = create_minio_client()
-        orm_logger.debug("MinIO client created")
-
-        async with client as client_obj:
-            # Загружаем данные в MinIO
-            orm_logger.debug("MinIO client context") 
-
-            resp = await client_obj.put_object(
-                Bucket=bucket_name, 
-                Key=object_name, 
-                Body=data
-            )
-
-            orm_logger.info(f"MinIO {resp}")
-
-    @classmethod
     async def first_insert_photo(cls, way_to_photo : str, way_to_metadata : str, bucket : str = None) -> int:
         """
         Первое добавление поступившей фотографии в бд: 
@@ -88,16 +76,16 @@ class AsyncORM:
             orm_logger.debug(f"photo {photo_id} added to session")
 
             # Добавление объекта фото в S3 
-            await cls.upload_to_minio(
-                bucket_name=bucket,
-                object_name=str(photo_id), 
-                data=photo_obj
+            await cls.s3client.upload_file(
+                photo_obj,
+                str(photo_id)
             )
 
             orm_logger.info(f"obj {photo_id} uploaded to {bucket}")
             # Коммит клиента реляционной бд после успешного 
             # сохранения изображения в S3
             await session.commit()
+            orm_logger.info(f"photo {photo_id} commited to table")
             
         return 200
 

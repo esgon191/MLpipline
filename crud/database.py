@@ -1,10 +1,10 @@
-import aiobotocore.session
 import asyncio, minio, logging, aiobotocore
 from typing import Annotated
-
+from aiobotocore.session import get_session
 from sqlalchemy import String, create_engine
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
+from contextlib import asynccontextmanager
 
 from logger import LoggerFactory
 from config import settings
@@ -21,18 +21,6 @@ async_session_factory = async_sessionmaker(async_engine)
 # Фабрика асинхронных клиентов S3
 session = aiobotocore.session.get_session()
 
-
-# Конфиг
-config = aiobotocore.config.AioConfig(connect_timeout=5, read_timeout=15)
-def create_minio_client():
-    return session.create_client(
-        's3',
-        endpoint_url = f'http://{settings.MINIO_HOST}:{settings.MINIO_PORT}',
-        aws_access_key_id = settings.MINIO_NAME,
-        aws_secret_access_key = settings.MINIO_PASSWORD,
-        config=config
-    )
-
 # Синхронный клиент подключения к S3
 minio_client = minio.Minio(
     f'{settings.MINIO_HOST}:{settings.MINIO_PORT}',
@@ -42,6 +30,41 @@ minio_client = minio.Minio(
     )
 # Логгер для ORM
 orm_logger = LoggerFactory.create_logger("orm", "logs/orm.log", level=logging.DEBUG)
+
+# Класс асинхронного клиента S3
+class S3Client:
+    def __init__(
+            self, 
+            access_key: str, 
+            secret_key: str, 
+            endpoint_url: str,
+            bucket_name: str
+    ):
+        self.config = {
+            "aws_access_key_id" : access_key,
+            "aws_secret_access_key" : secret_key,
+            "endpoint_url" : endpoint_url,
+        }
+        self.bucket_name =  bucket_name
+        self.session = get_session()
+
+    @asynccontextmanager
+    async def get_client(self):
+        async with self.session.create_client("s3", **self.config) as client:
+            yield client
+
+    async def upload_file(
+            self, 
+            object_binary,
+            object_name: str,
+    ):
+        async with self.get_client() as client:
+            await client.put_object(
+                Bucket=self.bucket_name,
+                Key=object_name,
+                Body=object_binary
+            )
+
 
 str_256 = Annotated[str, 256]
 class Base(DeclarativeBase):
