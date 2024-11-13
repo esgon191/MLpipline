@@ -1,3 +1,5 @@
+import aiobotocore.config
+import aiobotocore.session
 from database import async_engine, async_session_factory, create_minio_client, minio_client, orm_logger
 from models import Base, Photo, RoadSign, Defect, DetectedDefect, DetectedSign
 import json, aiobotocore, aiofiles
@@ -46,13 +48,14 @@ class AsyncORM:
         async with client as client_obj:
             # Загружаем данные в MinIO
             orm_logger.debug("MinIO client context") 
-            await client_obj.put_object(
+
+            resp = await client_obj.put_object(
                 Bucket=bucket_name, 
                 Key=object_name, 
                 Body=data
             )
 
-            orm_logger.info("MinIO object putted")
+            orm_logger.info(f"MinIO {resp}")
 
     @classmethod
     async def first_insert_photo(cls, way_to_photo : str, way_to_metadata : str, bucket : str = None) -> int:
@@ -86,9 +89,9 @@ class AsyncORM:
 
             # Добавление объекта фото в S3 
             await cls.upload_to_minio(
-                bucket,
-                str(photo_id), 
-                photo_obj
+                bucket_name=bucket,
+                object_name=str(photo_id), 
+                data=photo_obj
             )
 
             orm_logger.info(f"obj {photo_id} uploaded to {bucket}")

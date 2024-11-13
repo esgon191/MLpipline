@@ -21,12 +21,16 @@ async_session_factory = async_sessionmaker(async_engine)
 # Фабрика асинхронных клиентов S3
 session = aiobotocore.session.get_session()
 
+
+# Конфиг
+config = aiobotocore.config.AioConfig(connect_timeout=5, read_timeout=15)
 def create_minio_client():
     return session.create_client(
         's3',
         endpoint_url = f'http://{settings.MINIO_HOST}:{settings.MINIO_PORT}',
         aws_access_key_id = settings.MINIO_NAME,
-        aws_secret_access_key = settings.MINIO_PASSWORD
+        aws_secret_access_key = settings.MINIO_PASSWORD,
+        config=config
     )
 
 # Синхронный клиент подключения к S3
