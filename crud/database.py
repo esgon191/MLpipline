@@ -57,10 +57,14 @@ class S3Client:
             self, 
             object_binary,
             object_name: str,
+            bucket_name: str = None
     ):
+        if bucket_name is None:
+            bucket_name = self.bucket_name
+
         async with self.get_client() as client:
             await client.put_object(
-                Bucket=self.bucket_name,
+                Bucket=bucket_name,
                 Key=object_name,
                 Body=object_binary
             )

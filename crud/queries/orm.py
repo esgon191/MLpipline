@@ -70,7 +70,7 @@ class AsyncORM:
             # Добавление метаданных в клиент реляционной бд
             session.add(photo) 
             await session.flush()
-
+            # Получение присвоенного в реляционной бд первичного ключа
             photo_id = photo.id
 
             orm_logger.debug(f"photo {photo_id} added to session")
@@ -80,8 +80,8 @@ class AsyncORM:
                 photo_obj,
                 str(photo_id)
             )
-
             orm_logger.info(f"obj {photo_id} uploaded to {bucket}")
+            
             # Коммит клиента реляционной бд после успешного 
             # сохранения изображения в S3
             await session.commit()
