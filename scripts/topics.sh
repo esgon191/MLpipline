@@ -1,4 +1,4 @@
-docker-compose -p kursovaya up 
+docker exec -it kafka1 /bin/bash
 
 kafka-topics.sh --create \
   --topic  a_topic\
