@@ -30,72 +30,98 @@ services:
     command: server /data --address ":9000" --console-address ":9001"
     
   zookeeper:
-    image: zookeeper:3.9.3
+    image: bitnami/zookeeper:3.5
     container_name: zookeeper
     ports:
-      - "2181:2181"
-    environment:
-      ZOO_MY_ID: 1
-      ZOO_SERVERS: server.1=zookeeper:2888:3888
+      - "2181"
     networks:
-      - kafka-net
-
-  kafka1:
-    image: apache/kafka:3.9.0
-    container_name: kafka1
-    ports:
-      - "9092:9092"
+      - kafkanet
     environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
-      KAFKA_LOG_DIRS: /kafka/kafka-logs-1
+      - ALLOW_ANONYMOUS_LOGIN=yes
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - kafka-net
-
-  kafka2:
-    image: apache/kafka:3.9.0
-    container_name: kafka2
+      - zookeeper_data:/bitnami/zookeeper
+  kafka-0:
+    image: bitnami/kafka:2.8.1
+    container_name: kafka-0
+    expose:
+      - 9092
     ports:
-      - "9093:9093"
-    environment:
-      KAFKA_BROKER_ID: 2
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9093
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
-      KAFKA_LOG_DIRS: /kafka/kafka-logs-2
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - "29092:29092"
     networks:
-      - kafka-net
-
-  kafka3:
-    image: apache/kafka:3.9.0
-    container_name: kafka3
+      - kafkanet
+    environment:
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CFG_BROKER_ID=0
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=INTERNAL://:9092,EXTERNAL://:29092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=INTERNAL://kafka-0:9092,EXTERNAL://localhost:29092
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=INTERNAL
+    volumes:
+      - kafka_0_data:/bitnami/kafka
+    depends_on:
+      - zookeeper
+  kafka-1:
+    image: bitnami/kafka:2.8.1
+    container_name: kafka-1
+    expose:
+      - 9092
     ports:
-      - "9094:9094"
-    environment:
-      KAFKA_BROKER_ID: 3
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9094
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
-      KAFKA_LOG_DIRS: /kafka/kafka-logs-3
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - "29093:29093"
     networks:
-      - kafka-net
+      - kafkanet
+    environment:
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CFG_BROKER_ID=1
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=INTERNAL://:9092,EXTERNAL://:29093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=INTERNAL://kafka-1:9092,EXTERNAL://localhost:29093
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=INTERNAL
+    volumes:
+      - kafka_1_data:/bitnami/kafka
+    depends_on:
+      - zookeeper
+  kafka-2:
+    image: bitnami/kafka:2.8.1
+    container_name: kafka-2
+    expose:
+      - 9092
+    ports:
+      - "29094:29094"
+    networks:
+      - kafkanet
+    environment:
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CFG_BROKER_ID=2
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=INTERNAL://:9092,EXTERNAL://:29094
+      - KAFKA_CFG_ADVERTISED_LISTENERS=INTERNAL://kafka-2:9092,EXTERNAL://localhost:29094
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=INTERNAL
+    volumes:
+      - kafka_2_data:/bitnami/kafka
+    depends_on:
+      - zookeeper
 
 networks:
-  kafka-net:
-    driver: bridge
+  kafkanet:
+    name: kafka-network
 
 volumes:
+  zookeeper_data:
+    driver: local
+    name: zookeeper_data
+  kafka_0_data:
+    driver: local
+    name: kafka_0_data
+  kafka_1_data:
+    driver: local
+    name: kafka_1_data
+  kafka_2_data:
+    driver: local
+    name: kafka_2_data
+
   pgdata:
 
   minio_data:

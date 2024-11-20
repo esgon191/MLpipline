@@ -1,3 +1,3 @@
 docker-compose -p kursovaya up 
 
-zsh topics.sh
+#zsh topics.sh
