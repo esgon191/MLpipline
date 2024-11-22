@@ -61,6 +61,8 @@ services:
       - kafka_0_data:/bitnami/kafka
     depends_on:
       - zookeeper
+    
+
   kafka-1:
     image: bitnami/kafka:2.8.1
     container_name: kafka-1
