@@ -11,7 +11,7 @@ async def process_data():
     # Создание Kafka Consumer для input_topic
     consumer = AIOKafkaConsumer(
         INPUT_TOPIC,
-        bootstrap_servers='localhost:9092',
+        bootstrap_servers='localhost:29092',
         group_id="tensorflow_serving_group",
         value_deserializer=lambda x: json.loads(x.decode('utf-8'))
     )
