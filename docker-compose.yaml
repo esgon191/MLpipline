@@ -30,7 +30,7 @@ services:
     command: server /data --address ":9000" --console-address ":9001"
     
   zookeeper:
-    image: bitnami/zookeeper:3.5
+    image: bitnami/zookeeper:3.8.4
     container_name: zookeeper
     ports:
       - "2181"
@@ -41,7 +41,7 @@ services:
     volumes:
       - zookeeper_data:/bitnami/zookeeper
   kafka-0:
-    image: bitnami/kafka:2.8.1
+    image: bitnami/kafka:3.9.0
     container_name: kafka-0
     expose:
       - 9092
@@ -64,7 +64,7 @@ services:
     
 
   kafka-1:
-    image: bitnami/kafka:2.8.1
+    image: bitnami/kafka:3.9.0
     container_name: kafka-1
     expose:
       - 9092
@@ -85,7 +85,7 @@ services:
     depends_on:
       - zookeeper
   kafka-2:
-    image: bitnami/kafka:2.8.1
+    image: bitnami/kafka:3.9.0
     container_name: kafka-2
     expose:
       - 9092
