@@ -1,0 +1,1 @@
+KAFKA_TOPICS_BOOTSTRAP_SERVERS = ['localhost:29092', 'localhost:29093', 'localhost:29094']

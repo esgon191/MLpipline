@@ -3,6 +3,7 @@ import json
 import requests
 from aiokafka import AIOKafkaConsumer, AIOKafkaProducer
 import time 
+from config import *
 
 # Kafka Топики
 INPUT_TOPIC = "a_topic"
@@ -11,7 +12,7 @@ async def process_data():
     # Создание Kafka Consumer для input_topic
     consumer = AIOKafkaConsumer(
         INPUT_TOPIC,
-        bootstrap_servers='localhost:29092',
+        bootstrap_servers=KAFKA_TOPICS_BOOTSTRAP_SERVERS,
         group_id="tensorflow_serving_group",
         value_deserializer=lambda x: json.loads(x.decode('utf-8')),
         max_poll_interval_ms=10000,

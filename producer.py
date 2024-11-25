@@ -2,6 +2,7 @@ import asyncio
 import json
 import requests
 from aiokafka import  AIOKafkaProducer
+from config import *
 
 # Kafka Топики
 OUTPUT_TOPIC = "a_topic"
@@ -9,7 +10,7 @@ OUTPUT_TOPIC = "a_topic"
 async def process_data():
     # Создание Kafka Producer для output_topic
     producer = AIOKafkaProducer(
-        bootstrap_servers='localhost:29092',
+        bootstrap_servers=KAFKA_TOPICS_BOOTSTRAP_SERVERS,
         value_serializer=lambda v: json.dumps(v).encode('utf-8')
     )
 
