@@ -1,6 +1,4 @@
-import asyncio
-import json
-import requests
+import asyncio, json, time
 from aiokafka import  AIOKafkaProducer
 from config import *
 
@@ -20,6 +18,7 @@ async def process_data():
         output_data = {
             "message" : f"MESSAGE {i}"
         }
+        time.sleep(0.01)
         await producer.send_and_wait(OUTPUT_TOPIC, output_data)
         #print(f"Результат отправлен в Kafka: {output_data['message']}")
 
