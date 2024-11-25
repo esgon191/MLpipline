@@ -13,7 +13,8 @@ async def process_data():
         INPUT_TOPIC,
         bootstrap_servers='localhost:29092',
         group_id="tensorflow_serving_group",
-        value_deserializer=lambda x: json.loads(x.decode('utf-8'))
+        value_deserializer=lambda x: json.loads(x.decode('utf-8')),
+        auto_offset_reset='earliest'  # Начать чтение с самого начала, если нет смещений
     )
 
     await consumer.start()
