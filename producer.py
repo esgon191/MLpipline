@@ -15,12 +15,12 @@ async def process_data():
 
     await producer.start()
 
-    # Публикуем результат обратно в Kafka в output_topic
-    output_data = {
-        "message" : "MESSAGE"
-    }
-    await producer.send_and_wait(OUTPUT_TOPIC, output_data)
-    print(f"Результат отправлен в Kafka: {output_data}")
+    for i in range(1000):
+        output_data = {
+            "message" : f"MESSAGE {i}"
+        }
+        await producer.send_and_wait(OUTPUT_TOPIC, output_data)
+        #print(f"Результат отправлен в Kafka: {output_data['message']}")
 
     await producer.stop()
 

@@ -14,19 +14,22 @@ async def process_data():
         bootstrap_servers='localhost:29092',
         group_id="tensorflow_serving_group",
         value_deserializer=lambda x: json.loads(x.decode('utf-8')),
+        max_poll_interval_ms=10000,
         auto_offset_reset='earliest'  # Начать чтение с самого начала, если нет смещений
     )
 
     await consumer.start()
 
+    message_counter = 0
+
     try:
         async for message in consumer:
             input_data = message.value
-            for i in range(5):
-                print(i+1)
-                time.sleep(1)
 
-            print(f"Получены данные из Kafka: {input_data}")
+            message_counter += 1
+
+            print(f"Получены данные из Kafka: {input_data['message']}")
+            print(f'Всего получено сообщений {message_counter}')
 
 
     finally:
