@@ -40,6 +40,7 @@ services:
       - ALLOW_ANONYMOUS_LOGIN=yes
     volumes:
       - zookeeper_data:/bitnami/zookeeper
+
   kafka-0:
     image: bitnami/kafka:3.9.0
     container_name: kafka-0
@@ -62,7 +63,6 @@ services:
     depends_on:
       - zookeeper
     
-
   kafka-1:
     image: bitnami/kafka:3.9.0
     container_name: kafka-1
@@ -84,6 +84,7 @@ services:
       - kafka_1_data:/bitnami/kafka
     depends_on:
       - zookeeper
+      
   kafka-2:
     image: bitnami/kafka:3.9.0
     container_name: kafka-2
@@ -105,6 +106,19 @@ services:
       - kafka_2_data:/bitnami/kafka
     depends_on:
       - zookeeper
+
+  tensorflow_serving:
+    image: tensorflow/serving:2.18.0
+    ports:
+      - 8500:8500  # Порт для gRPC сервера
+      - 8501:8501  # Порт для REST API
+    volumes:
+      - ./models:/models  # Локальная папка с моделями монтируется в контейнер
+    environment:
+      - MODEL_NAME=testmodel
+    command: >
+      --model_config_file=/models/models.config
+      --model_config_file_poll_wait_seconds=600
 
 networks:
   kafkanet:
