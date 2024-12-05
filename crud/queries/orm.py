@@ -1,7 +1,8 @@
 from database import async_engine, async_session_factory, minio_client, orm_logger, S3Client
 from models import Base, Photo, RoadSign, Defect, DetectedDefect, DetectedSign
 from config import settings
-import json, aiofiles
+import json, aiofiles, io
+from PIL import Image
 
 class AsyncORM:
     default_bucket="bucket"
@@ -106,8 +107,11 @@ class AsyncORM:
 
     @classmethod
     async def get_photo(cls, object_name, bucket_name=None):
-        response = await cls.s3client.get_object(
+        response, obj = await cls.s3client.get_object(
             object_name=object_name,
             bucket_name=bucket_name
         )
-        return response
+
+        image = Image.open(io.BytesIO(obj))
+
+        return response, image

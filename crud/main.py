@@ -9,12 +9,8 @@ from PIL import Image
 async def main():
     #await AsyncORM.create_tables()
     #print(await AsyncORM.first_insert_photo(way_to_photo='../data/testdata/photo.jpg', way_to_metadata='../data/testdata/metadata.json'))
-    response = await AsyncORM.get_photo(bucket_name='bucket', object_name='1')
-    async with response['Body'] as stream:
-            image_data = await stream.read()
-
-            # Преобразование байт в объект Image (Pillow)
-            image = Image.open(io.BytesIO(image_data))
-            image.show()
+    response, image = await AsyncORM.get_photo(bucket_name='bucket', object_name='1')
+    print(response)
+    image.show()
 
 asyncio.run(main())
