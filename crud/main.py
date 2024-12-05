@@ -8,5 +8,6 @@ import asyncio
 async def main():
     await AsyncORM.create_tables()
     print(await AsyncORM.first_insert_photo(way_to_photo='../data/testdata/photo.jpg', way_to_metadata='../data/testdata/metadata.json'))
+    print(await AsyncORM.get_photo(bucket_name='bucket', object_name='1'))
 
 asyncio.run(main())

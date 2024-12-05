@@ -104,3 +104,10 @@ class AsyncORM:
     async def process_photo():
         pass
 
+    @classmethod
+    async def get_photo(cls, object_name, bucket_name=None):
+        response = await cls.s3client.get_object(
+            object_name=object_name,
+            bucket_name=bucket_name
+        )
+        return response

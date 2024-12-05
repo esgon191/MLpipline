@@ -5,7 +5,7 @@ services:
       - 8500:8500  # Порт для gRPC сервера
       - 8501:8501  # Порт для REST API
     volumes:
-      - ./models:/models  # Локальная папка с моделями монтируется в контейнер
+      - ../models:/models  # Локальная папка с моделями монтируется в контейнер
     environment:
       - MODEL_NAME=lighttestmodel
     command: >

@@ -69,6 +69,22 @@ class S3Client:
                 Body=object_binary
             )
 
+    async def get_object(
+            self, 
+            object_name,
+            bucket_name=None
+    ):
+        if bucket_name is None:
+            bucket_name = self.bucket_name
+
+        async with self.get_client() as client:
+            response = await client.get_object(
+                Bucket=bucket_name,
+                Key=object_name
+            )
+
+            return response
+
 
 str_256 = Annotated[str, 256]
 class Base(DeclarativeBase):

@@ -1,0 +1,12 @@
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    environment:
+      - MINIO_ROOT_USER=user         # Установите имя пользователя (по умолчанию: 'minio')
+      - MINIO_ROOT_PASSWORD=password  # Установите пароль (необходимо, чтобы длина была >= 8 символов)
+    volumes:
+      - minio_data:/data              # Сохраняйте данные в volume для устойчивости
+    ports:
+      - "9000:9000"                   # Порт для доступа к MinIO консоли
+      - "9001:9001"                   # Порт для доступа к административной панели
+    command: server /data --address ":9000" --console-address ":9001"
