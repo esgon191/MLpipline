@@ -19,7 +19,7 @@ async def process_data():
         value_deserializer=lambda x: json.loads(x.decode('utf-8')),
         max_poll_interval_ms=10000,
         auto_offset_reset='earliest',  # Начать чтение с самого начала, если нет смещений
-        fetch_max_bytes=31457280
+        fetch_max_bytes=60000000
     )
 
     await consumer.start()
