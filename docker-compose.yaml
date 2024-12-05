@@ -58,8 +58,8 @@ services:
       - KAFKA_CFG_LISTENERS=INTERNAL://:9092,EXTERNAL://:29092
       - KAFKA_CFG_ADVERTISED_LISTENERS=INTERNAL://kafka-0:9092,EXTERNAL://localhost:29092
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=INTERNAL
-      - KAFKA_MESSAGE_MAX_BYTES=31457280  # Настройка максимального размера сообщения 30 МБ
-      - KAFKA_MAX_REQUEST_SIZE=31457280   # Размер запроса, который брокер может принимать (30 МБ)
+      - KAFKA_MESSAGE_MAX_BYTES=60000000  # Настройка максимального размера сообщения 30 МБ
+      - KAFKA_MAX_REQUEST_SIZE=60000000   # Размер запроса, который брокер может принимать (30 МБ)
     volumes:
       - kafka_0_data:/bitnami/kafka
     depends_on:
@@ -82,8 +82,8 @@ services:
       - KAFKA_CFG_LISTENERS=INTERNAL://:9092,EXTERNAL://:29093
       - KAFKA_CFG_ADVERTISED_LISTENERS=INTERNAL://kafka-1:9092,EXTERNAL://localhost:29093
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=INTERNAL
-      - KAFKA_MESSAGE_MAX_BYTES=31457280  # Настройка максимального размера сообщения 30 МБ
-      - KAFKA_MAX_REQUEST_SIZE=31457280   # Размер запроса, который брокер может принимать (30 МБ)
+      - KAFKA_MESSAGE_MAX_BYTES=60000000  # Настройка максимального размера сообщения 30 МБ
+      - KAFKA_MAX_REQUEST_SIZE=60000000   # Размер запроса, который брокер может принимать (30 МБ)
     volumes:
       - kafka_1_data:/bitnami/kafka
     depends_on:
@@ -106,14 +106,14 @@ services:
       - KAFKA_CFG_LISTENERS=INTERNAL://:9092,EXTERNAL://:29094
       - KAFKA_CFG_ADVERTISED_LISTENERS=INTERNAL://kafka-2:9092,EXTERNAL://localhost:29094
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=INTERNAL
-      - KAFKA_MESSAGE_MAX_BYTES=31457280  # Настройка максимального размера сообщения 30 МБ
-      - KAFKA_MAX_REQUEST_SIZE=31457280   # Размер запроса, который брокер может принимать (30 МБ)
+      - KAFKA_MESSAGE_MAX_BYTES=60000000  # Настройка максимального размера сообщения 30 МБ
+      - KAFKA_MAX_REQUEST_SIZE=60000000   # Размер запроса, который брокер может принимать (30 МБ)
     volumes:
       - kafka_2_data:/bitnami/kafka
     depends_on:
       - zookeeper
 
-  tensorflow-light:
+  tensorflow-light-1:
     image: bitnami/tensorflow-serving:2.18.0
     ports:
       - 8500:8500  # Порт для gRPC сервера
@@ -129,6 +129,21 @@ services:
       --grpc_port=8500
     #cpus: "2.0"         # Ограничение CPU до 2 виртуальных процессоров
     #mem_limit: "4g"     # Ограничение памяти до 4 ГБ
+
+  tensorflow-light-2:
+      image: bitnami/tensorflow-serving:2.18.0
+      ports:
+        - 8502:8502  # Порт для gRPC сервера
+        - 8503:8503  # Порт для REST API
+      volumes:
+        - ./models:/models  # Локальная папка с моделями монтируется в контейнер
+      environment:
+        - MODEL_NAME=lighttestmodel
+      command: >
+        tensorflow_model_server
+        --model_config_file=/models/models.config   
+        --rest_api_port=8503
+        --grpc_port=8502
 
 networks:
   kafkanet:
