@@ -16,7 +16,8 @@ async def process_data():
         group_id="tensorflow_serving_group",
         value_deserializer=lambda x: json.loads(x.decode('utf-8')),
         max_poll_interval_ms=10000,
-        auto_offset_reset='earliest'  # Начать чтение с самого начала, если нет смещений
+        auto_offset_reset='earliest',  # Начать чтение с самого начала, если нет смещений
+        fetch_max_bytes=31457280
     )
 
     await consumer.start()
@@ -29,7 +30,7 @@ async def process_data():
 
             message_counter += 1
 
-            print(f"Получены данные из Kafka: {input_data['message']}")
+            print(f"Получены данные из Kafka: {input_data}")
             print(f'Всего получено сообщений {message_counter}')
 
 
