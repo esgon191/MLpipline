@@ -40,7 +40,7 @@ async def main():
 
     await producer.start()
 
-    await producer.send_and_wait(OUTPUT_TOPIC, json_image)
+    await producer.send_and_wait(OUTPUT_TOPIC, output_data)
     print('сообщение отправлено')
 
     await producer.stop()
