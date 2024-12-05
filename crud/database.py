@@ -82,8 +82,10 @@ class S3Client:
                 Bucket=bucket_name,
                 Key=object_name
             )
+            async with response['Body'] as stream:
+                obj = await stream.read()
 
-            return response
+            return response, obj
 
 
 str_256 = Annotated[str, 256]
