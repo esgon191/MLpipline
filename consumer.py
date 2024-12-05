@@ -1,12 +1,14 @@
-import asyncio
-import json
-import requests
+import asyncio, json, requests, aiohttp, time
 from aiokafka import AIOKafkaConsumer, AIOKafkaProducer
-import time 
 from config import *
 
 # Kafka Топики
 INPUT_TOPIC = "a_topic"
+
+# Постоянная часть запроса к tensorflow 
+url = "http://localhost:8501/v1/models/lighttestmodel:predict"
+headers = {"Content-Type": "application/json"}
+
 
 async def process_data():
     # Создание Kafka Consumer для input_topic
@@ -30,9 +32,16 @@ async def process_data():
 
             message_counter += 1
 
-            print(f"Получены данные из Kafka: {input_data}")
-            print(f'Всего получено сообщений {message_counter}')
+            data = {"instances" : input_data['image']}
 
+            # Открытие сессии
+            async with aiohttp.ClientSession() as session:
+                # Запрос 
+                async with session.post(url=url, headers=headers, json=data) as response:
+                    # Получение ответа
+                    response_data = await response.text()
+                    print(f"Статус: {response.status}")
+                    print(f"Тело: {response_data}")
 
     finally:
         await consumer.stop()
