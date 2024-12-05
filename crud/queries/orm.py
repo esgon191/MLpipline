@@ -107,6 +107,10 @@ class AsyncORM:
 
     @classmethod
     async def get_photo(cls, object_name, bucket_name=None):
+        """
+        Возвращает response и фотографию из клиента;
+        Считывние потока фотографии в бинарник происходит внутри s3client.get_object()
+        """
         response, obj = await cls.s3client.get_object(
             object_name=object_name,
             bucket_name=bucket_name
