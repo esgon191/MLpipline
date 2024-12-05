@@ -14,12 +14,9 @@ async def process_data():
 
     await producer.start()
 
-    for i in range(1000):
-        output_data = {
-            "message" : f"MESSAGE {i}"
-        }
-        time.sleep(0.01)
-        await producer.send_and_wait(OUTPUT_TOPIC, output_data)
+    
+
+    await producer.send_and_wait(OUTPUT_TOPIC, output_data)
         #print(f"Результат отправлен в Kafka: {output_data['message']}")
 
     await producer.stop()
