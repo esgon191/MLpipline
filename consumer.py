@@ -20,10 +20,10 @@ async def process_data(consumer_id: str):
         value_deserializer=lambda x: json.loads(x.decode('utf-8')),
         auto_offset_reset='earliest',  # Начать чтение с самого начала, если нет смещений
         fetch_max_bytes=100000000,
-        max_poll_interval_ms=60000,
-        session_timeout_ms=30000,
+        #max_poll_interval_ms=60000,
+        #session_timeout_ms=30000,
         #request_timeout_ms=10000,
-        heartbeat_interval_ms=3000
+        #heartbeat_interval_ms=3000
     )
 
     await consumer.start()

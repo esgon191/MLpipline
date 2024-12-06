@@ -23,8 +23,9 @@ def image_to_json(image):
 
 async def main():
     await AsyncORM.create_tables()
-    for photo_name in test_photos:
-        await AsyncORM.first_insert_photo(way_to_photo=f"../data/testdata/streets/{photo_name}", way_to_metadata='../data/testdata/streets/metadata.json')
+    for i in range(10):
+        for photo_name in test_photos:
+            await AsyncORM.first_insert_photo(way_to_photo=f"../data/testdata/streets/{photo_name}", way_to_metadata='../data/testdata/streets/metadata.json')
 
     
     producer = AIOKafkaProducer(
@@ -35,7 +36,7 @@ async def main():
 
     await producer.start()
 
-    for i in range(1, len(test_photos)+1):
+    for i in range(1, len(test_photos)*10+1):
         response, image = await AsyncORM.get_photo(bucket_name='bucket', object_name=str(i))
         json_image = image_to_json(image)
 
