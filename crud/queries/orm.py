@@ -117,5 +117,6 @@ class AsyncORM:
         )
 
         image = Image.open(io.BytesIO(obj))
+        image = image.convert('RGB')
 
         return response, image

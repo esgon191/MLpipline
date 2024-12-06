@@ -17,9 +17,10 @@ async def process_data():
         bootstrap_servers=KAFKA_TOPICS_BOOTSTRAP_SERVERS,
         group_id="tensorflow_serving_group",
         value_deserializer=lambda x: json.loads(x.decode('utf-8')),
-        max_poll_interval_ms=10000,
         auto_offset_reset='earliest',  # Начать чтение с самого начала, если нет смещений
-        fetch_max_bytes=60000000
+        fetch_max_bytes=100000000,
+        max_poll_interval_ms=60000,
+        session_timeout_ms=30000 
     )
 
     await consumer.start()
@@ -29,9 +30,9 @@ async def process_data():
     try:
         async for message in consumer:
             input_data = message.value
-
             message_counter += 1
-
+            print(f"Получено сообщение {message_counter}")
+            
             data = {"instances" : input_data['image']}
 
             # Открытие сессии
