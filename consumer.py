@@ -10,17 +10,20 @@ url = "http://localhost:8501/v1/models/lighttestmodel:predict"
 headers = {"Content-Type": "application/json"}
 
 
-async def process_data():
+async def process_data(consumer_id: str):
     # Создание Kafka Consumer для input_topic
     consumer = AIOKafkaConsumer(
         INPUT_TOPIC,
         bootstrap_servers=KAFKA_TOPICS_BOOTSTRAP_SERVERS,
         group_id="tensorflow_serving_group",
+        group_instance_id=consumer_id,
         value_deserializer=lambda x: json.loads(x.decode('utf-8')),
         auto_offset_reset='earliest',  # Начать чтение с самого начала, если нет смещений
         fetch_max_bytes=100000000,
         max_poll_interval_ms=60000,
-        session_timeout_ms=30000 
+        session_timeout_ms=30000,
+        #request_timeout_ms=10000,
+        heartbeat_interval_ms=3000
     )
 
     await consumer.start()
@@ -42,10 +45,11 @@ async def process_data():
                     # Получение ответа
                     response_data = await response.text()
                     print(f"Статус: {response.status}")
-                    print(f"Тело: {response_data}")
+                    #print(f"Тело: {response_data}")
 
     finally:
         await consumer.stop()
 
 # Запуск обработки данных
-asyncio.run(process_data())
+if __name__ == "__main__":
+    asyncio.run(process_data())
