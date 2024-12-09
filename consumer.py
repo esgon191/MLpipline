@@ -32,7 +32,8 @@ async def process_data(consumer_id: (str | None) = None):
         async for message in consumer:
             input_data = message.value
             message_counter += 1
-            print(f"Получено сообщение {message_counter}")
+            print(f"Получено сообщение {input_data['image_id']}")
+            print(f"Всего получено сообщений {message_counter}")
             
 
             obj = base64.b64decode(input_data['image']) # Бинарник
