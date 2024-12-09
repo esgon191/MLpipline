@@ -1,6 +1,8 @@
-import asyncio, json, requests, aiohttp, time
+import asyncio, json, requests, aiohttp, time, io
 from aiokafka import AIOKafkaConsumer, AIOKafkaProducer
+from PIL import Image
 from config import *
+from utils.image_converter import image_to_json
 
 # Kafka Топики
 INPUT_TOPIC = "a_topic"
@@ -19,7 +21,7 @@ async def process_data():
         value_deserializer=lambda x: json.loads(x.decode('utf-8')),
         max_poll_interval_ms=10000,
         auto_offset_reset='earliest',  # Начать чтение с самого начала, если нет смещений
-        fetch_max_bytes=60000000
+        # fetch_max_bytes=5000000 # Оставлю по умолчанию
     )
 
     await consumer.start()
@@ -32,7 +34,11 @@ async def process_data():
 
             message_counter += 1
 
-            data = {"instances" : input_data['image']}
+            obj = input_data['image'] # Бинарник 
+            image = Image.open(io.BytesIO(obj)) # Изображение 
+            json_image = image_to_json(image) # json (список shape=(1, None, None, 3))
+
+            data = {'instances' : json_image}
 
             # Открытие сессии
             async with aiohttp.ClientSession() as session:
