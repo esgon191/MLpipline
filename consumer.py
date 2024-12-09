@@ -49,7 +49,8 @@ async def process_data():
                     # Получение ответа
                     response_data = await response.text()
                     print(f"Статус: {response.status}")
-                    print(f"Тело: {response_data}")
+                    #print(f"Тело: {response_data}")
+                    print(f'Получено сообщений: {message_counter}')
 
     finally:
         await consumer.stop()
