@@ -1,4 +1,4 @@
-import asyncio, json, requests, aiohttp, time, io
+import asyncio, json, requests, aiohttp, time, io, base64
 from aiokafka import AIOKafkaConsumer, AIOKafkaProducer
 from PIL import Image
 from config import *
@@ -34,7 +34,8 @@ async def process_data():
 
             message_counter += 1
 
-            obj = input_data['image'] # Бинарник 
+
+            obj = base64.b64decode(input_data['image']) # Бинарник
             image = Image.open(io.BytesIO(obj)) # Изображение 
             json_image = image_to_json(image) # json (список shape=(1, None, None, 3))
 

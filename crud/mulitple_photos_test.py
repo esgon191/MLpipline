@@ -1,5 +1,5 @@
 from queries.orm import AsyncORM
-import asyncio, io, json
+import asyncio, io, json, base64
 import numpy as np
 from PIL import Image
 
@@ -28,8 +28,10 @@ async def main():
         response, obj = await AsyncORM.get_photo(bucket_name='bucket', object_name=str(i))
         #json_image = image_to_json(image)
 
+        encoded_data = base64.b64encode(obj).decode('utf-8')
+
         output_data = {
-            "image" : obj
+            "image" : encoded_data
         }
 
         await producer.send_and_wait(OUTPUT_TOPIC, output_data)
