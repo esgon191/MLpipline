@@ -12,7 +12,7 @@ url = "http://localhost:8501/v1/models/lighttestmodel:predict"
 headers = {"Content-Type": "application/json"}
 
 
-async def process_data(consumer_id: str):
+async def process_data(consumer_id: (str | None) = None):
     # Создание Kafka Consumer для input_topic
     consumer = AIOKafkaConsumer(
         INPUT_TOPIC,
@@ -21,7 +21,7 @@ async def process_data(consumer_id: str):
         group_instance_id=consumer_id,
         value_deserializer=lambda x: json.loads(x.decode('utf-8')),
         auto_offset_reset='earliest',  # Начать чтение с самого начала, если нет смещений
-        fetch_max_bytes=10000000 # 6мб
+        fetch_max_bytes=10000000 # 10мб
     )
 
     await consumer.start()
