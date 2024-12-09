@@ -37,6 +37,7 @@ async def process_data():
 
             obj = base64.b64decode(input_data['image']) # Бинарник
             image = Image.open(io.BytesIO(obj)) # Изображение 
+            image = image.convert('RGB') # Преобразование в 3 канала (на случай наличия альфа-канала)
             json_image = image_to_json(image) # json (список shape=(1, None, None, 3))
 
             data = {'instances' : json_image}
