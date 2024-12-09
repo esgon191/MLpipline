@@ -116,7 +116,8 @@ class AsyncORM:
             bucket_name=bucket_name
         )
 
-        image = Image.open(io.BytesIO(obj))
-        image = image.convert('RGB')
+        # Попробую отдавать объект в виде бинарника, 
+        # что бы не увеличивать размер сообщений
+        # image = Image.open(io.BytesIO(obj)) # Тип - изображение 
 
-        return response, image
+        return response, obj
