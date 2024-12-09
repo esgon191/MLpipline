@@ -33,7 +33,7 @@ async def main():
         }
 
         await producer.send_and_wait(OUTPUT_TOPIC, output_data)
-        print('сообщение отправлено')
+        print(f'Сообщений отправлено {i}')
 
     await producer.stop()
     
