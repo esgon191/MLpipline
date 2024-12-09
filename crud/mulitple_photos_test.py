@@ -1,7 +1,5 @@
 from queries.orm import AsyncORM
 import asyncio, io, json, base64
-import numpy as np
-from PIL import Image
 
 from aiokafka import  AIOKafkaProducer
 
@@ -19,7 +17,7 @@ async def main():
     producer = AIOKafkaProducer(
         bootstrap_servers=KAFKA_TOPICS_BOOTSTRAP_SERVERS,
         value_serializer=lambda v: json.dumps(v).encode('utf-8'),
-        #max_request_size=60000000
+        max_request_size=10000000
     )
 
     await producer.start()
