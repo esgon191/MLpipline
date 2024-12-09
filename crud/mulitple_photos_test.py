@@ -10,17 +10,6 @@ OUTPUT_TOPIC = "a_topic"
 
 test_photos = [f'street_{i}.png' for i in range(1, 11)]
 
-
-def image_to_json(image): 
-    """
-    Принимает на вход объект image, отдает json-строку
-    """
-
-    image_data = np.array(np.expand_dims(np.array(image), axis=0))
-    #image_data = json.dumps(image_data.tolist())
-    image_data = image_data.tolist()
-    return image_data
-
 async def main():
     await AsyncORM.create_tables()
     for photo_name in test_photos:
@@ -30,17 +19,17 @@ async def main():
     producer = AIOKafkaProducer(
         bootstrap_servers=KAFKA_TOPICS_BOOTSTRAP_SERVERS,
         value_serializer=lambda v: json.dumps(v).encode('utf-8'),
-        max_request_size=60000000
+        #max_request_size=60000000
     )
 
     await producer.start()
 
     for i in range(1, len(test_photos)+1):
-        response, image = await AsyncORM.get_photo(bucket_name='bucket', object_name=str(i))
-        json_image = image_to_json(image)
+        response, obj = await AsyncORM.get_photo(bucket_name='bucket', object_name=str(i))
+        #json_image = image_to_json(image)
 
         output_data = {
-            "image" : json_image
+            "image" : obj
         }
 
         await producer.send_and_wait(OUTPUT_TOPIC, output_data)
