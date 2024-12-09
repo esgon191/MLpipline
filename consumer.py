@@ -7,13 +7,14 @@ from utils.image_converter import image_to_json
 # Kafka Топики
 INPUT_TOPIC = "a_topic"
 
-# Постоянная часть запроса к tensorflow 
-url = "http://localhost:8501/v1/models/lighttestmodel:predict"
-headers = {"Content-Type": "application/json"}
 
+async def process_data(consumer_id: (str | None) = None, url: (str | None) = None, headers: (str | None) = None):
+    if url is None:
+        url = DEFAULT_URL
+    if headers is None:
+        headers = DEFAULT_HEADERS
 
-async def process_data(consumer_id: (str | None) = None):
-    # Создание Kafka Consumer для input_topic
+    # Создание Kafka Consumer
     consumer = AIOKafkaConsumer(
         INPUT_TOPIC,
         bootstrap_servers=KAFKA_TOPICS_BOOTSTRAP_SERVERS,

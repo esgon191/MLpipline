@@ -9,4 +9,4 @@ INPUT_TOPIC = "a_topic"
 url = "http://localhost:8501/v1/models/lighttestmodel:predict"
 headers = {"Content-Type": "application/json"}
 
-asyncio.run(process_data())
+asyncio.run(process_data(url=url))
