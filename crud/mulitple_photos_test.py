@@ -30,7 +30,8 @@ async def main():
         encoded_data = base64.b64encode(obj).decode('utf-8')
 
         output_data = {
-            "image" : encoded_data
+            "image" : encoded_data,
+            "image_id" : str(i)
         }
 
         await producer.send_and_wait(OUTPUT_TOPIC, output_data)
