@@ -127,7 +127,7 @@ services:
       --model_config_file=/models/models.config   
       --rest_api_port=8501
       --grpc_port=8500
-    cpus: "1.0"         # Ограничение CPU до 1 виртуального процессора
+    cpus: "2.0"         # Ограничение CPU до 2 виртуальных процессоров
     mem_limit: "2g"     # Ограничение памяти до 2 ГБ
 
   tensorflow-light-2:
@@ -144,7 +144,7 @@ services:
       --model_config_file=/models/models.config   
       --rest_api_port=8503
       --grpc_port=8502
-    cpus: "1.0"         # Ограничение CPU до 1 виртуального процессора
+    cpus: "2.0"         # Ограничение CPU до 2 виртуальных процессоров
     mem_limit: "2g"     # Ограничение памяти до 2 ГБ
 
 networks:
